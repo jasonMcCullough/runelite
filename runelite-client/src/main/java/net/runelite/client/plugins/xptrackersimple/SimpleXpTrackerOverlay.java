@@ -32,10 +32,7 @@ public class SimpleXpTrackerOverlay extends Overlay {
 
         panelComponent.getChildren().add(LineComponent.builder()
                 .left("Total XP:")
-                .build());
-
-        panelComponent.getChildren().add(LineComponent.builder()
-                .left(plugin.getTotalXpForSkill())
+                .right(plugin.getTotalXpForSkill())
                 .build());
 
         panelComponent.getChildren().add(LineComponent.builder()
@@ -50,10 +47,7 @@ public class SimpleXpTrackerOverlay extends Overlay {
 
         panelComponent.getChildren().add(LineComponent.builder()
                 .left("XP Remaining:")
-                .build());
-
-        panelComponent.getChildren().add(LineComponent.builder()
-                .left(plugin.getXpToTargetLevel())
+                .right(plugin.getXpToTargetLevel())
                 .build());
 
         return panelComponent.render(graphics);

@@ -22,6 +22,7 @@ import java.util.Locale;
 )
 public class SimpleXpTrackerPlugin extends Plugin {
 
+    private final String TARGET_LEVEL_REACHED_MESSAGE = "Gratz!";
     private Skill chosenSkill;
     private int targetLevel;
 
@@ -81,6 +82,7 @@ public class SimpleXpTrackerPlugin extends Plugin {
 
     public String getXpToTargetLevel() {
         if(chosenSkill != null) {
+            int currentLevel = client.getRealSkillLevel(chosenSkill);
             long currentXp = client.getSkillExperience(chosenSkill);
             long targetXp = 0;
 
@@ -88,10 +90,12 @@ public class SimpleXpTrackerPlugin extends Plugin {
                 targetXp += Math.floor(level + 300 * Math.pow(2, level/ 7.));
             }
 
-            if(targetXp <= currentXp) {
-                return String.valueOf(0);
-            } else {
+            if(currentLevel < targetLevel) {
                 return formatNumberWithCommas((targetXp/4) - currentXp);
+            } else if(currentLevel >= targetLevel && currentLevel != 0 && targetLevel != 0){
+                return TARGET_LEVEL_REACHED_MESSAGE;
+            } else {
+                return String.valueOf(0);
             }
         } else {
             return String.valueOf(0);
